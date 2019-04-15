@@ -25,6 +25,22 @@ const getAccessToken = async () => {
   return token;
 };
 
+const retrievePlaylist = async (playlistId) => {
+  const accessToken = await getAccessToken();
+  const url = `https://cms.api.brightcove.com/v1/accounts/${accountId}/playlists/${playlistId}`;
+  const response = await fetch(url, {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+  if (!response.ok) {
+    log('Bad Response', response);
+    throw new Error('Bad response from Brightcove API');
+  }
+  return response.json();
+};
+
 const retrieveVideo = async (videoId) => {
   const accessToken = await getAccessToken();
   const url = `https://cms.api.brightcove.com/v1/accounts/${accountId}/videos/${videoId}`;
@@ -41,8 +57,7 @@ const retrieveVideo = async (videoId) => {
   return response.json();
 };
 
-module.exports = async (id) => {
-  const video = await retrieveVideo(id);
-  // @todo pull out more details
-  return { ...video };
+module.exports = {
+  video: id => retrieveVideo(id),
+  playlist: id => retrievePlaylist(id),
 };
