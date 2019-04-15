@@ -9,10 +9,11 @@ const {
 const { log } = console;
 
 const getAccessToken = async () => {
-  const response = await fetch('https://oauth.brightcove.com/v4/access_token', {
+  const Authorization = Buffer.from(`${clientId}:${clientSecret}`).toString('base64');
+  const response = await fetch('https://oauth.brightcove.com/v4/access_token?grant_type=client_credentials', {
     method: 'POST',
     headers: {
-      Authorization: `Basic ${clientId}:${clientSecret}`,
+      Authorization: `Basic ${Authorization}`,
       'Content-Type': 'application/x-www-form-urlencoded',
     },
   });
