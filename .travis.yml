@@ -6,15 +6,10 @@ stages:
   - name: test
   - name: deploy
     if: tag is present
-  - name: notify
-    if: tag is present
 
 jobs:
   include:
     - stage: test
-    - stage: notify
-      script: scripts/deploy-notify.sh
-
     - stage: deploy
       name: Deploy Package
       script: scripts/deploy.js
