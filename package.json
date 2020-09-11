@@ -15,7 +15,7 @@
     "@base-cms/tooling": "^0.7.0",
     "@base-cms/utils": "^0.7.0",
     "express": "^4.16.4",
-    "node-fetch": "^2.3.0"
+    "node-fetch": "^2.6.1"
   },
   "devDependencies": {
     "eslint": "^5.16.0",
